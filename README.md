@@ -34,7 +34,7 @@ data will be distributed to 4 machines.
 reports for multiple services contain valuable data if we are going to monitor the
 services status and health.
 
-•We are required to calculate the below analytics over the data persisted in HDFS using Map Reduce jobs.
+-We are required to calculate the below analytics over the data persisted in HDFS using Map Reduce jobs.
  -The mean CPU utilization for each service
  -The mean Disk utilization for each service
  -The mean RAM utilization for each service
@@ -48,11 +48,11 @@ records having a common attribute and produces one record summarizing,
 reducing, these records.
 
 ###### Backend
-       -The backend should be simple with only one API exposed: a GET request specifying the window over which the analytics will be computed. The backend will start the map-reduce jobs to compute the required statistics.
+       The backend should be simple with only one API exposed: a GET request specifying the window over which the analytics will be computed. The backend will start the map-reduce jobs to compute the required statistics.
        
        
 ###### Frontend
-       -The frontend is a simple, single page application that contains a button with two date pickers to define the window ends. On click of the button, the frontend sends a GET request with the proper parameters to the backend requesting the needed analytics. The frontend will wait for the results and show them in any proper format.
+       The frontend is a simple, single page application that contains a button with two date pickers to define the window ends. On click of the button, the frontend sends a GET request with the proper parameters to the backend requesting the needed analytics. The frontend will wait for the results and show them in any proper format.
 
 
 
