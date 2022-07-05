@@ -34,12 +34,12 @@ data will be distributed to 4 machines.
 reports for multiple services contain valuable data if we are going to monitor the
 services status and health.
 
--We are required to calculate the below analytics over the data persisted in HDFS using Map Reduce jobs.
- -The mean CPU utilization for each service
- -The mean Disk utilization for each service
- -The mean RAM utilization for each service
- -The peak time of utilization for each resource for each service
- -The count of health messages received for each service
+•We are required to calculate the below analytics over the data persisted in HDFS using Map Reduce jobs.
+ - The mean CPU utilization for each service
+ - The mean Disk utilization for each service
+ - The mean RAM utilization for each service
+ - The peak time of utilization for each resource for each service
+ - The count of health messages received for each service
 
 •We are required to design and implement the map reduce jobs that will calculate
 the required statistics. The map step of any map-reduce job processes each record
