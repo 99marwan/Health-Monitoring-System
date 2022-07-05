@@ -57,8 +57,43 @@ reducing, these records.
 
 
 
+## Milestone 3 - Lambda Architecture
 
 
+![image](https://user-images.githubusercontent.com/58369917/177420382-a5278f5a-d53f-4362-b6b0-5f1b4369121c.png)
+
+•For this milestone, it is required to use the lambda architecture for our health
+monitor system. See the figure Above.
+
+1. The health reports arriving from the health monitor datasource will get persisted as raw data in the Batch Layer using HDFS using CSV files.
+2. Periodically the scheduler triggers Map-Reduce jobs to digest the HDFS data and construct Batch Views that represent the aggregated results. The output of the Map-Reduce jobs is saved as Parquet files.
+3. Periodically the scheduler triggers Spark jobs to create Realtime Views that capture the recent data. The output of the Spark jobs is saved as Parquet files.
+4. Both the Serving Layers and the Speed Layers use NoSQL databases to allow querying the views using SQL. DuckDB was used.
+5. Whenever the Frontend submits a request to the Backend, the Backend sends SQL queries to both Serving Layers & Speed Layers and stitches the results together and sends it back to the Frontend.
+6. The user is going to access your frontend from any browser and click a button to request some analytics functions over a window of time. The analytics functions that you need to implement are :
+   - The mean CPU utilization for each service
+   - The mean Disk utilization for each service
+   - The mean RAM utilization for each service
+   - The peak time of utilization for each resource for each service
+   - The count of health messages received for each service
+
+
+###### Batch Layer
+       Use implementation of Milestone 1 to process health messages
+       
+###### Serving Layer
+       Use implementation of Milestone 2 to generate Batch Views using Map-Reduce. But instead of triggering map reduce by every backend request, it will be triggered periodically controlled by a scheduler.
+
+###### Speed Layer
+       - It is required to design a speed layer that has an input stream of health messages and outputs and stores the current analytical results of the required analytics in the form of Parquet files. The scheduler will trigger running the Spark jobs to generate the Realtime Views.
+       - We needed to expire Realtime Views that are already consumed in the Serving Layer. That will require to maintain two sets of the Realtime Views and alternate between them
+       
+
+###### Backend
+       Remains the same but in addition, The backend will collect query results by contacting both speed layer and batch views to aggregate the results and stitch them together.
+
+###### Frontend
+       Remains the same but in addition, time picker is added with the date for more precision.
 
 
 
