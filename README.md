@@ -48,11 +48,11 @@ records having a common attribute and produces one record summarizing,
 reducing, these records.
 
 ###### Backend
-       The backend should be simple with only one API exposed: a GET request specifying the window over which the analytics will be computed. The backend will start the map-reduce jobs to compute the required statistics.
+The backend should be simple with only one API exposed: a GET request specifying the window over which the analytics will be computed. The backend will start the map-reduce jobs to compute the required statistics.
        
        
 ###### Frontend
-       The frontend is a simple, single page application that contains a button with two date pickers to define the window ends. On click of the button, the frontend sends a GET request with the proper parameters to the backend requesting the needed analytics. The frontend will wait for the results and show them in any proper format.
+The frontend is a simple, single page application that contains a button with two date pickers to define the window ends. On click of the button, the frontend sends a GET request with the proper parameters to the backend requesting the needed analytics. The frontend will wait for the results and show them in any proper format.
 
 
 
@@ -79,18 +79,18 @@ monitor system. See the figure Above.
 
 
 ###### Batch Layer
-       Use implementation of Milestone 1 to process health messages
+Use implementation of Milestone 1 to process health messages
        
 ###### Serving Layer
-       Use implementation of Milestone 2 to generate Batch Views using Map-Reduce. But instead of triggering map reduce by every backend request, it will be triggered periodically controlled by a scheduler.
+Use implementation of Milestone 2 to generate Batch Views using Map-Reduce. But instead of triggering map reduce by every backend request, it will be triggered periodically controlled by a scheduler.
 
 ###### Speed Layer
-       - It is required to design a speed layer that has an input stream of health messages and outputs and stores the current analytical results of the required analytics in the form of Parquet files. The scheduler will trigger running the Spark jobs to generate the Realtime Views.
-       - We needed to expire Realtime Views that are already consumed in the Serving Layer. That will require to maintain two sets of the Realtime Views and alternate between them
+- It is required to design a speed layer that has an input stream of health messages and outputs and stores the current analytical results of the required analytics in the form of Parquet files. The scheduler will trigger running the Spark jobs to generate the Realtime Views.
+- We needed to expire Realtime Views that are already consumed in the Serving Layer. That will require to maintain two sets of the Realtime Views and alternate between them
        
 
 ###### Backend
-       Remains the same but in addition, The backend will collect query results by contacting both speed layer and batch views to aggregate the results and stitch them together.
+Remains the same but in addition, The backend will collect query results by contacting both speed layer and batch views to aggregate the results and stitch them together.
 
 ###### Frontend
 Remains the same but in addition, time picker is added with the date for more precision.
